@@ -28,13 +28,13 @@
      <id>spring-deploy</id>
  <distributionManagement>
     <repository>
-      <id>spring-releases</id>
-      <name>spring-releases</name>
+      <id>spring-release</id>
+      <name>spring-release</name>
       <url>http://35.174.153.54:8081/nexus/content/repositories/sprint-release/</url>
     </repository>
     <snapshotRepository>
-      <id>spring-snapshots</id>
-      <name>spring-snapshots</name>
+      <id>spring-snapshot</id>
+      <name>spring-snapshot</name>
       <url>http://35.174.153.54:8081/nexus/content/repositories/spring-snapshot/</url>
     </snapshotRepository>
   </distributionManagement>
