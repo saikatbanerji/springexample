@@ -1,25 +1,16 @@
-env.mvnHome = '/usr/share/maven3'
-node('mavenlabel') {
-   
-   
-   stage('Preparation') { // for display purposes
-      
-      git 'https://github.com/jglick/simple-maven-project-with-tests.git'
-        
-      
+node('slave') {
+   def mvnHome
+   stage('Git') { // for display purposes
+      // Get some code from a GitHub repository
+      git 'https://github.com/saikatbanerji/springexample.git'
+      // Get the Maven tool.
+      // ** NOTE: This 'M3' Maven tool must be configured
+      // **       in the global configuration.           
+      mvnHome = "/usr/share/maven"
    }
-   stage('Build') {
-      
-      if (isUnix()) {
-         sh "'${mvnHome}/bin/mvn' clean install"
-      } else {
-         bat(/"${mvnHome}\bin\mvn" -Dmaven.test.failure.ignore clean package/)
-      }
+   stage('Build_SONAR_NEXUS') {
+      // Run the maven build
+     sh 'mvn -f pom.xml -P spring-deploy clean deploy sonar:sonar'
+
    }
-   stage('Results') {
-      junit '**/target/surefire-reports/TEST-*.xml'
-      archive 'target/*.jar'
-   }
-   
-aa
 }
